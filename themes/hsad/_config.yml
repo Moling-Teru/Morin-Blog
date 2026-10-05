@@ -1,0 +1,45 @@
+avatar: /images/avatar.jpg
+sidebar_background: /images/background.jpg
+accent_color: '#774dff'
+accent_soft: '#be9aff'
+brand_name: 墨翎rin
+brand_subtitle: 陆止于此 海始于斯
+sidebar_note: 总要有你所热爱的东西。
+hero:
+  title: ''
+  kicker: ''
+  description: ''
+excerpt_length: 56
+menu:
+  - name: 首页
+    path: /
+  - name: 归档
+    path: /archives/
+  - name: 分类
+    path: /categories/
+  - name: 标签
+    path: /tags/
+  - name: 搜索
+    path: /search/
+  - name: 友链
+    path: /links/
+  - name: 关于
+    path: /about/
+social:
+  - name: GitHub
+    url: https://github.com/Moling-Teru
+  - name: E-Mail
+    url: mailto:moling-teru@gmail.com
+  - name: Bilibili
+    url: https://space.bilibili.com/549729354
+footer:
+  text: Love from NSFZ. 至少现在如此。
+  support:
+    enable: true
+    title: Vercel
+    link: https://vercel.com/
+    logo: https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/favicon.ico
+    prefix: 本网站基于
+    suffix: 运行
+  license_name: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans

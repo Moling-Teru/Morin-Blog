@@ -1,0 +1,35 @@
+- var postCollection = []
+if page.posts
+  if typeof page.posts.toArray === 'function'
+    - postCollection = page.posts.toArray()
+  else if page.posts.data
+    - postCollection = page.posts.data
+  else
+    - postCollection = page.posts
+- postCollection = postCollection.filter(function(post) { return !hsad_is_hidden(post); })
+if postCollection.length
+  .post-list
+    each post in postCollection
+      - var categoryList = []
+      - if (post.categories)
+      -   if (typeof post.categories.toArray === 'function') categoryList = post.categories.toArray()
+      -   else if (post.categories.data) categoryList = post.categories.data
+      - var previewLimit = theme.excerpt_length || 72
+      - var summary = hsad_summary(post, previewLimit)
+      - var leafCategory = hsad_leaf_category(categoryList)
+      article.post-card
+        header.post-card__header
+          h2.post-card__title
+            a(href=url_for(post.path))= post.title
+          .post-card__meta
+            time(datetime=date_xml(post.date))= date(post.date, config.date_format || 'YYYY-MM-DD')
+            if leafCategory
+              span.post-card__dot /
+              a.post-card__meta-link(href=url_for(leafCategory.path))= leafCategory.name
+        if summary
+          p.post-card__summary= summary
+        a.post-card__more(href=url_for(post.path)) 阅读全文
+else
+  .empty-state
+    h2.empty-state__title 暂时还没有内容
+    p.empty-state__text 这里很快会长出新的文章。

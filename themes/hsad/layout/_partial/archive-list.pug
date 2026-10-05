@@ -1,0 +1,32 @@
+- var archiveCollection = []
+if page.posts
+  if typeof page.posts.toArray === 'function'
+    - archiveCollection = page.posts.toArray()
+  else if page.posts.data
+    - archiveCollection = page.posts.data
+  else
+    - archiveCollection = page.posts
+- archiveCollection = archiveCollection.filter(function(post) { return !hsad_is_hidden(post); })
+if archiveCollection.length
+  - var yearBuckets = []
+  - archiveCollection.forEach(function(post) { var yearKey = date(post.date, 'YYYY'); var bucket = yearBuckets[yearBuckets.length - 1]; if (!bucket || bucket.year !== yearKey) { bucket = { year: yearKey, posts: [] }; yearBuckets.push(bucket); } bucket.posts.push(post); })
+  .archive-list
+    each bucket in yearBuckets
+      section.archive-group
+        h2.archive-group__year= bucket.year
+        .archive-group__items
+          each post in bucket.posts
+            - var categoryList = []
+            - if (post.categories)
+            -   if (typeof post.categories.toArray === 'function') categoryList = post.categories.toArray()
+            -   else if (post.categories.data) categoryList = post.categories.data
+            - var leafCategory = hsad_leaf_category(categoryList)
+            a.archive-entry(href=url_for(post.path))
+              time.archive-entry__date(datetime=date_xml(post.date))= date(post.date, 'MM-DD')
+              span.archive-entry__title= post.title
+              if leafCategory
+                span.archive-entry__meta= leafCategory.name
+else
+  .empty-state
+    h2.empty-state__title 暂时还没有内容
+    p.empty-state__text 这里很快会长出新的文章。

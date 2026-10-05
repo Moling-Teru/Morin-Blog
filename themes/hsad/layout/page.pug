@@ -1,0 +1,11 @@
+extends ./_partial/base.pug
+
+block content
+  article.article.article--page
+    header.article__header
+      h1.article__title= page.title
+      if page.date
+        .article__meta
+          time(datetime=date_xml(page.date))= date(page.date, config.date_format || 'YYYY-MM-DD')
+    .article__content
+      != page.content

@@ -1,0 +1,4 @@
+if page.total && page.total > 1
+  - var pagerConfig = { prev_text: '上一页', next_text: '下一页', end_size: 1, mid_size: 2, escape: false }
+  nav.pagination
+    != paginator(pagerConfig)

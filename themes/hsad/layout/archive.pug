@@ -1,0 +1,8 @@
+extends ./_partial/base.pug
+
+block content
+  section.page-intro
+    h1.page-intro__title= page.year ? `${page.year}` : '归档'
+    p.page-intro__description 全是文章……不会成为我的黑历史吧？
+  include _partial/archive-list
+  include _partial/pagination

@@ -1,0 +1,65 @@
+extends ./_partial/base.pug
+
+block content
+  - var categoryList = []
+  - if (page.categories)
+  -   if (typeof page.categories.toArray === 'function') categoryList = page.categories.toArray()
+  -   else if (page.categories.data) categoryList = page.categories.data
+  - var tagList = []
+  - if (page.tags)
+  -   if (typeof page.tags.toArray === 'function') tagList = page.tags.toArray()
+  -   else if (page.tags.data) tagList = page.tags.data
+  - var headingMatches = page.content ? (page.content.match(/<h([2-4])\b/gi) || []) : []
+  - var headingDepths = headingMatches.map(function(heading) { return Number(heading.match(/\d/)[0]); })
+  - var primaryHeadingDepth = headingDepths.indexOf(2) !== -1 ? 2 : (headingDepths.indexOf(3) !== -1 ? 3 : 4)
+  - var mobileMaxDepth = primaryHeadingDepth === 2 ? 3 : (primaryHeadingDepth === 3 ? 4 : 4)
+  - var mobileTocHtml = headingDepths.length ? toc(page.content, { min_depth: primaryHeadingDepth, max_depth: mobileMaxDepth, list_number: false, class: 'post-toc__list' }) : ''
+  - var desktopTocHtml = headingDepths.length ? toc(page.content, { min_depth: primaryHeadingDepth, max_depth: primaryHeadingDepth, list_number: false, class: 'post-toc__list' }) : ''
+  - var hasToc = Boolean(String(desktopTocHtml || '').trim())
+  .article-layout(class=hasToc ? 'article-layout--with-toc' : 'article-layout--plain')
+    article.article
+      header.article__header
+        if categoryList.length
+          .article__eyebrow
+            each category, idx in categoryList
+              if idx
+                span.article__divider /
+              a(href=url_for(category.path))= category.name
+        h1.article__title= page.title
+        .article__meta
+          time(datetime=date_xml(page.date))= date(page.date, config.date_format || 'YYYY-MM-DD')
+          if page.updated
+            span.article__divider /
+            span= `更新于 ${date(page.updated, config.date_format || 'YYYY-MM-DD')}`
+        if tagList.length
+          .article__tags
+            each tag in tagList
+              a.article__tag(href=url_for(tag.path))= tag.name
+      if hasToc
+        details.post-outline.post-outline--mobile
+          summary.post-outline__summary
+            span 本文导航
+            small 按标题快速定位
+          nav.post-toc(data-post-toc)
+            != mobileTocHtml
+      .article__content
+        != page.content
+    if hasToc
+      aside.post-outline.post-outline--desktop(aria-label='文章目录')
+        p.post-outline__title 本文导航
+        nav.post-toc(data-post-toc)
+          != desktopTocHtml
+  - var previousPost = page.prev
+  - while (previousPost && hsad_is_hidden(previousPost)) previousPost = previousPost.prev
+  - var nextPost = page.next
+  - while (nextPost && hsad_is_hidden(nextPost)) nextPost = nextPost.next
+  if previousPost || nextPost
+    nav.post-nav
+      if previousPost
+        a.post-nav__item.post-nav__item--prev(href=url_for(previousPost.path))
+          span.post-nav__label 上一篇
+          strong= previousPost.title
+      if nextPost
+        a.post-nav__item.post-nav__item--next(href=url_for(nextPost.path))
+          span.post-nav__label 下一篇
+          strong= nextPost.title

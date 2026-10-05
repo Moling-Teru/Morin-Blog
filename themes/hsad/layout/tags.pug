@@ -1,0 +1,18 @@
+extends ./_partial/base.pug
+
+block content
+  - var tags = site.tags ? (typeof site.tags.toArray === 'function' ? site.tags.toArray() : (site.tags.data || [])) : []
+  - var tagRows = tags.map(function(tag) { return { tag: tag, count: hsad_visible_count(tag) }; }).filter(function(row) { return row.count; }).sort(function(a, b) { return b.count - a.count || a.tag.name.localeCompare(b.tag.name, 'zh-CN'); })
+  section.page-intro
+    h1.page-intro__title 标签
+    p.page-intro__description= tagRows.length ? `${tagRows.length} 个标签，比写简介好玩些。` : '暂时还没有标签。'
+  if tagRows.length
+    .tag-cloud
+      each row in tagRows
+        a.tag-cloud__item(href=url_for(row.tag.path))
+          span.tag-cloud__name= row.tag.name
+          span.tag-cloud__count= row.count
+  else
+    .empty-state
+      h2.empty-state__title 暂时还没有标签
+      p.empty-state__text 等以后再说！

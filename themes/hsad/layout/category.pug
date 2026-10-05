@@ -1,0 +1,12 @@
+extends ./_partial/base.pug
+
+block content
+  - var pathParts = (page.path || '').split('/').filter(Boolean)
+  - var slug = pathParts[pathParts.length - 1] || ''
+  - if (slug === 'index.html') slug = pathParts[pathParts.length - 2] || ''
+  - var categoryTitle = (page.category && page.category.name) || page.category || (slug ? decodeURIComponent(slug) : '') || page.title || '分类'
+  section.page-intro
+    h1.page-intro__title= categoryTitle
+    p.page-intro__description 分类整理，但也许不会太勤快。
+  include _partial/archive-list
+  include _partial/pagination

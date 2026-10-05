@@ -1,0 +1,12 @@
+extends ./_partial/base.pug
+
+block content
+  - var pathParts = (page.path || '').split('/').filter(Boolean)
+  - var slug = pathParts[pathParts.length - 1] || ''
+  - if (slug === 'index.html') slug = pathParts[pathParts.length - 2] || ''
+  - var tagTitle = (page.tag && page.tag.name) || page.tag || (slug ? decodeURIComponent(slug) : '') || page.title || '标签'
+  section.page-intro
+    h1.page-intro__title= tagTitle
+    p.page-intro__description 这里不是同人圈，打tag随心所欲。
+  include _partial/archive-list
+  include _partial/pagination

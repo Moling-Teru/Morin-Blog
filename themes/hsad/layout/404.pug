@@ -1,0 +1,8 @@
+extends ./_partial/base.pug
+
+block content
+  section.not-found
+    p.not-found__code 404
+    h1.not-found__title= page.title || '页面走丢了'
+    p.not-found__text 一个不该涉足的神秘领域……或者只是你输错了地址。
+    a.not-found__link(href=url_for('/')) 回到首页

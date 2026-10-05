@@ -1,0 +1,35 @@
+{
+  "name": "blog-hsad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "hexo server",
+    "build": "hexo generate",
+    "clean": "hexo clean"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "hexo": {
+    "version": "8.1.2"
+  },
+  "overrides": {
+    "hexo-render-pug": {
+      "pug": "3.0.4"
+    }
+  },
+  "dependencies": {
+    "hexo": "^8.1.2",
+    "hexo-admonition-new": "^2.0.1",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^4.0.0",
+    "hexo-generator-search": "^2.4.3",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-render-pug": "^2.1.4",
+    "hexo-renderer-marked": "^7.0.1",
+    "hexo-server": "^3.0.0"
+  }
+}

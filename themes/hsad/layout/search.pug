@@ -1,0 +1,14 @@
+extends ./_partial/base.pug
+
+block content
+  - var searchIndexPath = (config.search && config.search.path) || '/search.xml'
+  section.page-intro
+    h1.page-intro__title 搜索
+    p.page-intro__description 在标题和正文里找一段记忆。
+  section.search-panel(data-search data-search-index=url_for(searchIndexPath))
+    form.search-form(data-search-form role='search')
+      label.sr-only(for='site-search-input') 搜索文章
+      input#site-search-input.search-form__input(type='search' inputmode='search' autocomplete='off' placeholder='输入标题、知识点或一句话' data-search-input)
+      button.search-form__submit(type='submit') 搜索
+    p.search-status(data-search-status aria-live='polite') 输入关键词，可检索标题和正文
+    ol.search-results(data-search-results)

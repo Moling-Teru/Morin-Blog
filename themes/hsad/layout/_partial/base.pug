@@ -1,0 +1,72 @@
+- var siteTitle = theme.brand_name || config.title || 'Blog'
+- var currentTitle = page.title ? `${page.title} | ${siteTitle}` : siteTitle
+- var autoDescription = typeof hsad_summary === 'function' ? hsad_summary(page, 150) : ''
+- var currentDescription = page.description || autoDescription || config.description || config.subtitle || siteTitle
+- var licenseName = (theme.footer && theme.footer.license_name) || theme.license_name
+- var licenseUrl = (theme.footer && theme.footer.license_url) || theme.license_url
+- var accentColor = theme.accent_color
+- var accentSoft = theme.accent_soft
+- var accentStrong = accentColor ? `color-mix(in srgb, ${accentColor} 62%, #223142)` : ''
+doctype html
+html(lang=config.language || 'zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='theme-color' content=theme.accent_color || '#5b7c99')
+    meta(name='description' content=currentDescription)
+    meta(name='author' content=config.author || siteTitle)
+    != meta_generator()
+    title= currentTitle
+    link(rel='icon' type='image/png' href=url_for('/favicon.png'))
+    if accentColor || accentSoft
+      style.
+        :root {
+          #{accentColor ? `--accent: ${accentColor};` : ''}
+          #{accentStrong ? `--accent-strong: ${accentStrong};` : ''}
+          #{accentSoft ? `--accent-soft: ${accentSoft};` : ''}
+        }
+    link(rel='stylesheet' href=hsad_theme_asset('/css/hsad-theme.css'))
+    link(rel='stylesheet' href=hsad_theme_asset('/css/admonition.css'))
+    script(src=hsad_theme_asset('/js/hsad-theme.js') defer)
+  body(class=[is_home() ? 'view-home' : 'view-inner', is_post() ? 'view-post' : 'view-page'].join(' '))
+    if is_post()
+      .reading-progress(aria-hidden='true')
+        span.reading-progress__bar(data-reading-progress)
+    .site-shell
+      aside.site-sidebar
+        - var sidebarMode = 'desktop'
+        include sidebar
+      .mobile-topbar
+        button.mobile-topbar__toggle.js-drawer-toggle(type='button' aria-label='打开导航' aria-controls='mobile-navigation' aria-expanded='false')
+          span
+          span
+          span
+        a.mobile-topbar__title(href=url_for('/'))= theme.brand_name || config.title || 'Blog'
+        if theme.avatar
+          a.mobile-topbar__avatar(href=url_for('/'))
+            img(src=url_for(theme.avatar) alt=(config.author || siteTitle))
+      #mobile-navigation.mobile-drawer(data-drawer aria-hidden='true' inert)
+        .mobile-drawer__panel
+          - var sidebarMode = 'mobile'
+          include sidebar
+      button.mobile-backdrop.js-drawer-close(type='button' aria-label='关闭导航' tabindex='-1')
+      main.site-main
+        block content
+      footer.site-footer
+        p.site-footer__text= (theme.footer && theme.footer.text) || config.description || config.subtitle || ''
+        if theme.footer && theme.footer.support && theme.footer.support.enable
+          a.site-footer__support(href=theme.footer.support.link target='_blank' rel='noopener')
+            if theme.footer.support.logo
+              img.site-footer__support-logo(src=theme.footer.support.logo alt=theme.footer.support.title)
+            span.site-footer__support-copy
+              if theme.footer.support.prefix
+                span= `${theme.footer.support.prefix} `
+              strong= theme.footer.support.title
+              if theme.footer.support.suffix
+                span= ` ${theme.footer.support.suffix}`
+        if licenseName && licenseUrl
+          p.site-footer__license
+            | 本站内容采用
+            a(href=licenseUrl target='_blank' rel='noopener')= ` ${licenseName} `
+            | 协议发布

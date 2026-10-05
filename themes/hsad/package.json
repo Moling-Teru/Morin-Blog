@@ -1,0 +1,22 @@
+{
+  "name": "hexo-theme-hsad",
+  "version": "0.1.0",
+  "description": "A quiet editorial Hexo theme with a fixed visual sidebar and a calm archive timeline.",
+  "keywords": [
+    "hexo",
+    "hexo-theme",
+    "blog",
+    "editorial",
+    "responsive"
+  ],
+  "homepage": "https://github.com/watanabe-hsad/hexo-theme-hsad#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watanabe-hsad/hexo-theme-hsad.git"
+  },
+  "bugs": {
+    "url": "https://github.com/watanabe-hsad/hexo-theme-hsad/issues"
+  },
+  "license": "MIT",
+  "author": "watanabe"
+}

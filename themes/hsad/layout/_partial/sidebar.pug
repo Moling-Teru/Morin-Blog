@@ -1,0 +1,30 @@
+- var mode = typeof sidebarMode === 'undefined' ? 'desktop' : sidebarMode
+- var navItems = theme.menu || []
+- var socialItems = theme.social || []
+- var pagePath = (page.path || '').replace(/^\/+/, '')
+section(class=`sidebar sidebar--${mode}`)
+  .sidebar__backdrop(style=theme.sidebar_background ? `background-image:url(${url_for(theme.sidebar_background)})` : '')
+  .sidebar__overlay
+  .sidebar__content
+    a.sidebar__brand(href=url_for('/'))
+      if theme.avatar
+        img.sidebar__avatar(src=url_for(theme.avatar) alt=(config.author || config.title || 'Avatar'))
+      .sidebar__identity
+        h2.sidebar__title= theme.brand_name || config.title || 'hsad'
+        if theme.brand_subtitle || config.subtitle
+          p.sidebar__subtitle= theme.brand_subtitle || config.subtitle
+    if theme.sidebar_note || config.description
+      p.sidebar__description= theme.sidebar_note || config.description
+    nav.sidebar__nav(aria-label='Primary')
+      each item in navItems
+        - var itemPath = item.path || '/'
+        - var isExternal = /^https?:/.test(itemPath) || /^mailto:/.test(itemPath)
+        - var normalized = itemPath.replace(/^\/+/, '')
+        - var active = false
+        if !isExternal
+          - active = normalized === '' ? is_home() : pagePath.indexOf(normalized) === 0
+        a(class=active ? 'is-active' : '' href=isExternal ? itemPath : url_for(itemPath) target=isExternal ? '_blank' : null rel=isExternal ? 'noopener' : null)= item.name
+    if socialItems.length
+      .sidebar__social
+        each item in socialItems
+          a(href=item.url target='_blank' rel='noopener')= item.name
