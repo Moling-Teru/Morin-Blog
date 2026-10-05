@@ -2,3 +2,4 @@
 /public
 db.json
 /.local-backups/
+/.vercel/
