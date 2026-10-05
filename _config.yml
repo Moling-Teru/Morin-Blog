@@ -2,7 +2,7 @@ title: 墨翎の博客
 author: Morin
 language: zh-CN
 timezone: Asia/Shanghai
-url: http://localhost:4000
+url: https://blog.rin-tery.fyi
 root: /
 permalink: :year/:month/:day/:title/
 theme: hsad
