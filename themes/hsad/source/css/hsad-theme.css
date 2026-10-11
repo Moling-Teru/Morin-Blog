@@ -984,6 +984,15 @@ img {
   text-align: center;
 }
 
+.article__content iframe.netease-music,
+iframe.netease-music {
+  display: block;
+  width: 100%;
+  max-width: 530px;
+  height: 116px !important;
+  border: 0;
+}
+
 .article-media__label {
   letter-spacing: 0.12em;
   text-transform: uppercase;
