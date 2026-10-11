@@ -1,0 +1,93 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #2a3440;
+  font-size: 13px;
+  --player-hue: 235;
+  --player-saturation: 65%;
+  --player-accent: hsl(var(--player-hue) var(--player-saturation) 65%);
+  --player-accent-text: hsl(var(--player-hue) var(--player-saturation) 26%);
+  --player-tint: hsl(var(--player-hue) var(--player-saturation) 65% / 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; padding-bottom: 6px; background: transparent; }
+
+.player {
+  min-height: 160px;
+  border-left: 4px solid var(--player-accent);
+  border-radius: 6px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.04);
+  overflow: hidden;
+}
+
+.player__info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 66px;
+  padding: 10px 16px 10px 12px;
+  background: var(--player-tint);
+  color: var(--player-accent-text);
+}
+
+.player__cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: var(--player-tint);
+  color: var(--player-accent-text);
+  font-size: 25px;
+}
+
+.player__cover img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+
+.player__details { flex: 1; min-width: 0; }
+
+.player__details strong, .player__details span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.player__details strong { font-size: 14px; font-weight: 600; }
+.player__details span { color: #647182; font-size: 12px; }
+
+a { color: var(--player-accent-text); font-size: 11px; text-decoration: none; white-space: nowrap; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--player-accent-text); outline-offset: 3px; border-radius: 2px; }
+
+.player__content { padding: 12px 16px; }
+
+audio { display: block; width: 100%; height: 36px; accent-color: var(--player-accent); }
+
+.player__footer {
+  margin-top: 8px;
+  color: #647182;
+  font-size: 11px;
+  line-height: 1.6;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#lyric { color: var(--player-accent-text); }
+
+[hidden] { display: none !important; }
+
+@media (max-width: 360px) {
+  .player__info { flex-wrap: wrap; gap: 4px 8px; padding: 8px 10px; }
+  .player__cover { flex-basis: 32px; height: 32px; }
+  .player__details { flex-basis: calc(100% - 40px); }
+  #song-link { margin-left: 40px; }
+  .player__content { padding: 10px; }
+  .player__footer { margin-top: 6px; }
+}

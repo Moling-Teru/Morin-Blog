@@ -19,6 +19,9 @@ html(lang=config.language || 'zh-CN')
     != meta_generator()
     title= currentTitle
     link(rel='icon' type='image/png' href=url_for('/favicon.png'))
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&display=swap')
     if accentColor || accentSoft
       style.
         :root {

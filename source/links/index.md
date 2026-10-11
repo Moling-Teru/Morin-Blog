@@ -8,5 +8,10 @@ links:
     name: 南师附中开发者社
     blog: NSFZ Developer
     desc: 神人多且神人神
+  - url: https://drivinggodj.github.io/nsfz-campus-gallery/
+    avatar: https://avatars.githubusercontent.com/u/111051514
+    name: 附中影像
+    blog: Made by DrivingGodJ
+    desc: 三维校园照片档案
 comments: false
 ---

@@ -7,9 +7,27 @@
       "installCommand": "npm ci",
       "buildCommand": "npm run build",
       "outputDirectory": "public"
+    },
+    "music": {
+      "root": "services/netease-api",
+      "framework": "express",
+      "entrypoint": "server.js",
+      "installCommand": "npm ci",
+      "functions": {
+        "server.js": {
+          "maxDuration": 30,
+          "includeFiles": "../../node_modules/@neteasecloudmusicapienhanced/{api,unblockmusic-utils}/**"
+        }
+      }
     }
   },
   "rewrites": [
+    {
+      "source": "/api/netease/(.*)",
+      "destination": {
+        "service": "music"
+      }
+    },
     {
       "source": "/(.*)",
       "destination": {

@@ -2,10 +2,15 @@ title: 墨翎の博客
 author: Morin
 language: zh-CN
 timezone: Asia/Shanghai
-url: https://blog.rin-tery.fyi
+url: https://blog.rin-teru.fyi
 root: /
 permalink: :year/:month/:day/:title/
 theme: hsad
+
+# 播放器及音乐 API 同项目部署，Vercel Services 将此路径路由到 Node.js 服务。
+netease_music:
+  api: /api/netease/
+  real_ip: 116.25.146.177
 
 # highlight
 syntax_highlighter: prismjs

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>网易云音乐播放器</title>
+  <link rel="stylesheet" href="./player.css">
+  <script src="./player.js" defer></script>
+</head>
+<body>
+  <section class="player" aria-label="网易云音乐">
+    <div class="player__info">
+      <div class="player__cover" aria-hidden="true">
+        <span>♫</span>
+        <img id="cover" alt="" hidden referrerpolicy="no-referrer">
+      </div>
+      <div class="player__details">
+        <strong id="title">网易云音乐</strong>
+        <span id="artist">外链播放器</span>
+      </div>
+      <a id="song-link" target="_blank" rel="noopener noreferrer" hidden>在网易云打开 ↗</a>
+    </div>
+    <div class="player__content">
+      <audio id="audio" controls loop preload="none" aria-label="歌曲播放控制"></audio>
+      <div class="player__footer">
+        <span id="status" role="status" aria-live="polite">点击播放</span>
+        <span id="lyric" hidden></span>
+      </div>
+      <noscript>请启用 JavaScript 后播放。</noscript>
+    </div>
+  </section>
+</body>
+</html>

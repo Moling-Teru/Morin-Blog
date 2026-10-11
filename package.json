@@ -6,12 +6,20 @@
   "scripts": {
     "start": "hexo server",
     "build": "hexo generate",
-    "clean": "hexo clean"
+    "clean": "hexo clean",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "private": true,
+  "workspaces": [
+    "services/netease-api"
+  ],
+  "engines": {
+    "node": "24.x"
+  },
   "hexo": {
     "version": "8.1.2"
   },
