@@ -16,6 +16,8 @@ description: '消耗一些额度，换取一些功能'
 
 二编：又用了Gemini 3.8 Flash把极其丑的UI改成了有点丑的UI……
 
+三编：让Deepseek 4.1 Flash 1017又修了一遍，希望能耐看点
+
 借此机会正好来推个歌:)
 
 !:[wyy_music_id=2077114455]
